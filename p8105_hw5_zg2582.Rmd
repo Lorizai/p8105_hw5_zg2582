@@ -107,3 +107,18 @@ study_df = tibble(
   mutate(week = as.numeric(week)) |>
   select(subject, arm, subject_id, week, observation)
 ```
+
+### Spaghetti plot
+
+```{r}
+study_df |>
+  ggplot(aes(x = week, y = observation, group = subject, color = arm)) +
+  geom_line(alpha = .7) +
+  geom_point(alpha = .7, size = .8) +
+  scale_x_continuous(breaks = 1:8) +
+  labs(
+    title = "Observations over time for each subject",
+    x = "Week",
+    y = "Observation",
+    color = "Study arm")
+```
