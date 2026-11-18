@@ -57,3 +57,5 @@ bday_sim_df |>
     x = "Group size",
     y = "Estimated probability")
 ```
+
+The probability of shared birthdays increases with group size. It is near 0 for small groups, passes 50% at a group size of about 23, and is close to 1 for a group of 50. 
