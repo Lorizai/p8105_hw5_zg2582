@@ -59,3 +59,25 @@ bday_sim_df |>
 ```
 
 The probability of shared birthdays increases with group size. It is near 0 for small groups, passes 50% at a group size of about 23, and is close to 1 for a group of 50. 
+
+
+# Problem 2
+
+### data frame of file names
+
+```{r}
+study_df =
+  tibble(file_name = list.files("./data")
+  )
+```
+
+### Read every file
+
+```{r message = FALSE}
+study_df =
+  tibble(file_name = list.files("./data")
+  ) |>
+  mutate(file_path = str_c("./data/", file_name),
+    data = map(file_path, read_csv)
+  )
+```
