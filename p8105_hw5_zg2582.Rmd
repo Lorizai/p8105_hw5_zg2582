@@ -63,7 +63,7 @@ The probability of shared birthdays increases with group size. It is near 0 for 
 
 # Problem 2
 
-### data frame of file names
+### Data frame of file names
 
 ```{r}
 study_df =
@@ -80,4 +80,30 @@ study_df =
   mutate(file_path = str_c("./data/", file_name),
     data = map(file_path, read_csv)
   )
+```
+
+### Tidy the data
+
+```{r message = FALSE, warning = FALSE}
+study_df = tibble(
+    file_name = list.files("./data")
+  ) |>
+  mutate( file_path = str_c("./data/", file_name),
+    data = map(file_path, read_csv)
+  ) |>
+  unnest(data) |>
+  mutate(file_name = str_replace(file_name, ".csv", "")) |>
+  separate(file_name, into = c("arm", "subject_id"), sep = "_") |>
+  mutate(
+    arm = case_match(arm, "con" ~ "Control", "exp" ~ "Experimental"),
+    subject = str_c(arm, " ", subject_id)
+  ) |>
+  pivot_longer(
+    week_1:week_8,
+    names_to = "week",
+    names_prefix = "week_",
+    values_to = "observation"
+  ) |>
+  mutate(week = as.numeric(week)) |>
+  select(subject, arm, subject_id, week, observation)
 ```
