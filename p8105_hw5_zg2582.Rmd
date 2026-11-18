@@ -20,18 +20,26 @@ theme_set(theme_minimal() + theme(legend.position = "bottom"))
 ```
 
 
-#Problem 1
+# Problem 1
 
-###Write birthday function
+### Write birthday function
 
 ```{r}
 bday_sim = function(n) {
-
   birthdays = sample(1:365, size = n, replace = TRUE)
-
   repeated_bday = n_distinct(birthdays) < n
-
   repeated_bday
-
 }
+```
+
+### Run it 10000 times for each group size between 2 and 50
+
+```{r}
+bday_sim_df =
+  expand_grid(group_size = 2:50,
+    iter = 1:10000) |>
+  mutate(shared_bday = map_lgl(group_size, bday_sim)) |>
+  group_by(group_size) |>
+  summarize(prob_shared = mean(shared_bday)
+)
 ```
