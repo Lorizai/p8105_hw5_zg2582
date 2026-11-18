@@ -122,3 +122,5 @@ study_df |>
     y = "Observation",
     color = "Study arm")
 ```
+
+At the start of the study, the two groups have similar observations. Over the eight weeks, observations in the experimental arm increase steadily, while observations in the control arm stay roughly flat. By the end of the study, every experimental subject has a higher observation than every control subject, suggesting the intervention is associated with an increase in the outcome over time.
