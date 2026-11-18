@@ -124,3 +124,17 @@ study_df |>
 ```
 
 At the start of the study, the two groups have similar observations. Over the eight weeks, observations in the experimental arm increase steadily, while observations in the control arm stay roughly flat. By the end of the study, every experimental subject has a higher observation than every control subject, suggesting the intervention is associated with an increase in the outcome over time.
+
+# Problem 3
+
+### Function for one dataset and one test
+
+```{r ttest_function}
+sim_ttest = function(mu, n = 30, sigma = 5) {
+  sim_data = tibble(x = rnorm(n, mean = mu, sd = sigma)
+  )
+  t.test(pull(sim_data, x), mu = 0) |>
+    broom::tidy() |>
+    select(estimate, p.value)
+}
+```
