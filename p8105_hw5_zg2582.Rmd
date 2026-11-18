@@ -43,3 +43,17 @@ bday_sim_df =
   summarize(prob_shared = mean(shared_bday)
 )
 ```
+
+
+### Plot
+
+```{r}
+bday_sim_df |>
+  ggplot(aes(x = group_size, y = prob_shared)) +
+  geom_point() +
+  geom_line() +
+  labs(
+    title = "Probability that at least two people share a birthday",
+    x = "Group size",
+    y = "Estimated probability")
+```
