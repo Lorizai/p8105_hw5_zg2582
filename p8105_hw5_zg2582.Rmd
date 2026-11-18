@@ -168,3 +168,5 @@ power_sim_df |>
     x = "True value of μ",
     y = "Power (proportion of nulls rejected)")
 ```
+
+Power increases with effect size. When the true mean is 0, the null is rejected about 5% of the time, which matches the significance level. Power rises steeply as μ increases, and almost 100% for μ = 4 and 100% for μ > 4. Larger effects are easier to detect.
